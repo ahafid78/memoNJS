@@ -1,3 +1,4 @@
 *.tmp
 log.txt
 tmp/*
+memo.back
