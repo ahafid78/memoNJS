@@ -7,7 +7,12 @@ module.exports = (app) => {
       where: { id: id },
     })
       .then((_) => {
-        Pokemon.findByPk(id).then((pokemon) => {
+        return Pokemon.findByPk(id).then((pokemon) => {
+          if (pokemon === null) {
+            const message =
+              "Le pokemon demandé nexiste pas. Réessayez avec un autre identifiant";
+            return res.status(404).json({ message });
+          }
           const message = `Le pokémon ${pokemon.name} a bien été modifié.`;
           res.json({ message, data: pokemon });
         });
