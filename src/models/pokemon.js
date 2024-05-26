@@ -11,6 +11,14 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Le nom ne peut pas être vide vie",
+          },
+          notNull: {
+            msg: "Le nom est une propriété requise",
+          },
+        },
       },
       hp: {
         type: DataTypes.INTEGER,
@@ -18,6 +26,14 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           isInt: {
             msg: "Utilisez uniquement des nombres entiers pour les points de vie",
+          },
+          min: {
+            args: [0],
+            msg: "Les points de vie doivent être supérieurs ou égales à 0",
+          },
+          max: {
+            args: [999],
+            msg: "Les points de vie doivent être inférieurs ou égales à 999",
           },
           notNull: {
             msg: "Les points de vie sont une propriété requise",
@@ -32,6 +48,14 @@ module.exports = (sequelize, DataTypes) => {
           isInt: {
             msg: "Utilisez uniquement des nombres entiers pour les cp",
           },
+          min: {
+            args: [0],
+            msg: "Les points de vie doivent être supérieurs ou égales à 0",
+          },
+          max: {
+            args: [999],
+            msg: "Les points de vie doivent être inférieurs ou égales à 999",
+          },
           notNull: {
             msg: "Les cp sont une propriété requise",
           },
@@ -40,6 +64,14 @@ module.exports = (sequelize, DataTypes) => {
       picture: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          isUrl: {
+            msg: "Utilisez une URL valide",
+          },
+          notNull: {
+            msg: "L'image est une propriété requise",
+          },
+        },
       },
       types: {
         type: DataTypes.STRING,
@@ -49,6 +81,18 @@ module.exports = (sequelize, DataTypes) => {
         },
         set(types) {
           this.setDataValue("types", types.join());
+        },
+        validate: {
+          isTypesValid(value) {
+            if (!value) {
+              throw new Error("Un pokémon doit avoir au moins un type");
+            }
+            if (value.split(",").length > 3) {
+              throw new Error(
+                "Un pokémon ne peut pas avoir plus que trois types"
+              );
+            }
+          },
         },
       },
     },
