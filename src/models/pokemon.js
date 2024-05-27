@@ -1,4 +1,16 @@
 /* L’API Rest et la Base de données : Créer un modèle Sequelize */
+const validTypes = [
+  "Plante",
+  "Poison",
+  "Feu",
+  "Eau",
+  "Insecte",
+  "Vol",
+  "Normal",
+  "Electrik",
+  "Fée",
+];
+
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define(
     "Pokemon",
@@ -92,6 +104,13 @@ module.exports = (sequelize, DataTypes) => {
                 "Un pokémon ne peut pas avoir plus que trois types"
               );
             }
+            value.split(",").forEach((type) => {
+              if (!validTypes.includes(type)) {
+                throw new Error(
+                  `Le type d'un pokémon doit appartenir à la liste suivante : ${validTypes}`
+                );
+              }
+            });
           },
         },
       },
