@@ -31,4 +31,9 @@ Codes utilisés :
 200 succès
 4xx erreur coté client (exemple: 400= le core de la requete incorecte, 401= client non authentifié, 403= non autorisé a acceder a une ressource, 404 = ressource demandée introuvable)
 5xx probleme coté serveur 
+///
+(parsInt) or express envoi tous les params sous forme de caracteres  
+
+/////
+configuration_recherche _dans_ findAllPokemon.js
 

@@ -5,6 +5,7 @@ module.exports = (app) => {
   app.get("/api/pokemons", (req, res) => {
     if (req.query.name) {
       const name = req.query.name;
+      const limit = parseInt(req.query.limit) || 5;
       return Pokemon.findAndCountAll({
         where: {
           name: {
@@ -17,13 +18,33 @@ module.exports = (app) => {
             // On recherche un pokémon qui qui contient le terme de recherche (notre cas):  %${name}%
           },
         },
-        limit: 5, // limiter les résultats à  05
+        order: ["name"],
+        limit: limit, // limiter les résultats dynamiquement
+        // Explication:
+        // L'utilisateur souhaite récupérer 5 pokémons
+        // mon-site.com/api/pokemons?limit=5
+
+        // L'utilisateur souhaite récupérer 10 pokémons
+        // mon-site.com/api/pokemons?limit=10
+
+        // L'utilisateur souhaite récupérer 1 pokémons
+        // mon-site.com/api/pokemons?limit=1
+
+        // Par défault, la limite est à 5 pokémons
+        // mon-site.com/api/pokemons
       }).then(({ count, rows }) => {
         const message = `Il y a ${count} pokemons qui corresponde aux termes de recherche ${name} `;
         res.json({ message, data: rows });
       });
     } else {
-      Pokemon.findAll()
+      Pokemon.findAll({ order: ["name"] })
+        //Explication:
+        //Cas1: On tri par ordre alphabétique croissant, sur la propriété "name" : ['name','ASC']
+        //Cas2: On tri par ordre alphabétique décroissant, sur la propriété "name" : ['name','DESC']
+
+        //Cas3: On tri par ordre alphabétique croissant, sur la propriété "name",
+        //(par default) en utilisant un raccourci de syntaxe. Identique au cas n°1 ! : ['name']
+
         .then((pokemons) => {
           const message = "La liste des pokémons a bien été récupérée.";
           res.json({ message, data: pokemons });

@@ -34,7 +34,7 @@ require("./src/routes/deletePokemon")(app);
 
 const errorHandler = (req, res, next) => {
   const message =
-    "Impossible de trouver la ressource demandée ! Vous pouvez essayer ube autre URL";
+    "Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL";
   res.status(404).json({ message, data: error });
   next();
 };
