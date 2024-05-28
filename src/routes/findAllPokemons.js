@@ -6,6 +6,13 @@ module.exports = (app) => {
     if (req.query.name) {
       const name = req.query.name;
       const limit = parseInt(req.query.limit) || 5;
+
+      if (name.lenth < 2) {
+        const message =
+          "Le terme de recherche doit contenir au moins 02 caracteres";
+        return res.status(400).json({ message });
+      }
+
       return Pokemon.findAndCountAll({
         where: {
           name: {
