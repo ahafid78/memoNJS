@@ -36,4 +36,36 @@ Codes utilisés :
 
 /////
 configuration_recherche _dans_ findAllPokemon.js
+////
+//hach
+npm install bcrypt --save
+//jwt
+npm install jsonwebtoken --save
 
+// Pour chaque point de terminison : (passer par un middleware= auth.js)
+//1// créer et retourner des jettons valide pour les clients
+//2// Sécuriser les échanges de jettons entre le client et l'API REST
+//3// extraire le jetton du header et vérifier si ce jetton est valide
+//4// en fonction de la validité de ce jetton nous retournerons soit les données demandée par l'utilisateur soit le refus 
+
+//////////////
+Deploiment :
+
+1/ git
+2/ telecharger heroku CLIet l'installer en suite ouvrir cmd et tapper: heroku login
+3/ node test.js (dans vscode)
+ajouter dans app.js : const port = process.env.PORT || 3000;
+4/ package.json 
+ "scripts": {
+    "start": "nodemon app.js",
+    "dev": "nodemon app.js"
+  }
+ npm run start (en prod)
+npm run dev (en dev)
+
+5/ passer express en mode production
+NODE_ENV
+
+6/ Ne pas utiliser les dependances de developpement
+
+Enlever morgan du package.json et aussi de app.js
