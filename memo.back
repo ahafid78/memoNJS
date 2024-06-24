@@ -66,6 +66,9 @@ npm run dev (en dev)
 5/ passer express en mode production
 NODE_ENV
 
+// "start": "NODE_ENV=production node app.js",
+// "dev": "NODE_ENV=development nodemon app.js"
+
 6/ Ne pas utiliser les dependances de developpement
 
 Enlever morgan du package.json et aussi de app.js
