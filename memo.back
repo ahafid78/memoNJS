@@ -73,3 +73,13 @@ NODE_ENV
 6/ Ne pas utiliser les dependances de developpement
 
 Enlever morgan du package.json et aussi de app.js
+
+git :
+
+echo "# Backend-RENDER" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/ahafid78/Backend-RENDER.git
+git push -u origin main
