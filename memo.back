@@ -49,6 +49,7 @@ npm install jsonwebtoken --save
 //4// en fonction de la validité de ce jetton nous retournerons soit les données demandée par l'utilisateur soit le refus 
 
 //////////////
+
 Deploiment :
 
 1/ git
